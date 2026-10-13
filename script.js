@@ -1,22 +1,40 @@
-// Default configuration matching the original screenshot with 1:30:00 countdown
-const DEFAULT_CONFIG = {
-  carrier: "Миколаївелектротранс",
-  purchased: "Придбано 13 жовтня о 20:09",
-  count: "1 квиток",
-  secondsRemaining: 5400, // 1 hour 30 min 00 sec
-  serial: "164 142",
-  ticker: "Життя — цікаве, і мотивація то є сильна: філософія, психологія. Найголовніше — залишайтеся людьми і кричіть, що ви живі. Я живий!",
-  gearVisible: true
-};
-
-let currentConfig = { ...DEFAULT_CONFIG };
-let timerInterval = null;
-let currentRemaining = currentConfig.secondsRemaining;
-
+// Default configuration with real-time dynamic date & 1:30:00 countdown
 const UK_MONTHS = [
   "січня", "лютого", "березня", "квітня", "травня", "червня",
   "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"
 ];
+
+const TICKET_DURATION_SECONDS = 5400; // 1 hour 30 min 00 sec
+const STORAGE_KEY = "monobank_ticket_state_v1";
+
+const DEFAULT_CONFIG = {
+  carrier: "Миколаївелектротранс",
+  purchased: "", // dynamically generated
+  count: "1 квиток",
+  secondsRemaining: TICKET_DURATION_SECONDS,
+  serial: "164 142",
+  ticker: "Життя — цікаве, і мотивація то є сильна: філософія, психологія. Найголовніше — залишайтеся людьми і кричіть, що ви живі. Я живий!",
+  gearVisible: true,
+  startTime: null
+};
+
+let currentConfig = { ...DEFAULT_CONFIG };
+let timerInterval = null;
+let currentRemaining = TICKET_DURATION_SECONDS;
+
+// Helper: Format any date into Ukrainian string "Придбано 13 жовтня о 20:09"
+function formatUkPurchased(dateObj) {
+  const day = dateObj.getDate();
+  const month = UK_MONTHS[dateObj.getMonth()];
+  const hours = String(dateObj.getHours()).padStart(2, "0");
+  const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+  return `Придбано ${day} ${month} о ${hours}:${minutes}`;
+}
+
+// Helper: Format current timestamp in Ukrainian
+function getCurrentUkTime() {
+  return formatUkPurchased(new Date());
+}
 
 // Format seconds into H:MM:SS (e.g. 1:30:00, 1:29:59)
 function formatTime(totalSeconds) {
@@ -29,6 +47,59 @@ function formatTime(totalSeconds) {
   const paddedSeconds = String(seconds).padStart(2, "0");
 
   return `${hours}:${paddedMinutes}:${paddedSeconds}`;
+}
+
+// Save ticket state to localStorage
+function saveTicketState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      carrier: currentConfig.carrier,
+      purchased: currentConfig.purchased,
+      count: currentConfig.count,
+      serial: currentConfig.serial,
+      ticker: currentConfig.ticker,
+      gearVisible: currentConfig.gearVisible,
+      startTime: currentConfig.startTime,
+      duration: TICKET_DURATION_SECONDS
+    }));
+  } catch (e) {
+    console.warn("Storage save failed", e);
+  }
+}
+
+// Load or synchronize ticket on page open
+function initSynchronizedTicket() {
+  const now = Date.now();
+  let saved = null;
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) saved = JSON.parse(raw);
+  } catch (e) {
+    console.warn("Storage load failed", e);
+  }
+
+  // If saved ticket exists and hasn't expired (< 1:30:00)
+  if (saved && saved.startTime && (now - saved.startTime < TICKET_DURATION_SECONDS * 1000)) {
+    const elapsedSeconds = Math.floor((now - saved.startTime) / 1000);
+    currentRemaining = Math.max(0, TICKET_DURATION_SECONDS - elapsedSeconds);
+    currentConfig = {
+      ...DEFAULT_CONFIG,
+      ...saved,
+      secondsRemaining: currentRemaining
+    };
+  } else {
+    // Brand new ticket timestamped right now
+    const nowTimestamp = Date.now();
+    currentRemaining = TICKET_DURATION_SECONDS;
+    currentConfig = {
+      ...DEFAULT_CONFIG,
+      purchased: formatUkPurchased(new Date(nowTimestamp)),
+      secondsRemaining: currentRemaining,
+      startTime: nowTimestamp
+    };
+    saveTicketState();
+  }
 }
 
 // Update DOM elements with current config
@@ -54,29 +125,28 @@ function updateUI() {
   }
 }
 
-// Start live countdown timer
+// Start live countdown timer (immune to tab backgrounding / sleep)
 function startTimer() {
   if (timerInterval) clearInterval(timerInterval);
 
-  timerInterval = setInterval(() => {
-    if (currentRemaining > 0) {
+  function tick() {
+    if (currentConfig.startTime) {
+      const elapsed = Math.floor((Date.now() - currentConfig.startTime) / 1000);
+      currentRemaining = Math.max(0, TICKET_DURATION_SECONDS - elapsed);
+    } else if (currentRemaining > 0) {
       currentRemaining--;
-      document.getElementById("display-timer").textContent = formatTime(currentRemaining);
-    } else {
+    }
+
+    document.getElementById("display-timer").textContent = formatTime(currentRemaining);
+
+    if (currentRemaining <= 0) {
       clearInterval(timerInterval);
       document.getElementById("display-timer").textContent = "0:00:00";
     }
-  }, 1000);
-}
+  }
 
-// Helper: Format current timestamp in Ukrainian
-function getCurrentUkTime() {
-  const now = new Date();
-  const day = now.getDate();
-  const month = UK_MONTHS[now.getMonth()];
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  return `Придбано ${day} ${month} о ${hours}:${minutes}`;
+  tick();
+  timerInterval = setInterval(tick, 1000);
 }
 
 // Modals logic
@@ -124,31 +194,39 @@ function initModals() {
   // Set current time button in settings
   document.getElementById("btn-set-current-time").addEventListener("click", () => {
     document.getElementById("input-purchased").value = getCurrentUkTime();
+    document.getElementById("input-timer-seconds").value = TICKET_DURATION_SECONDS;
   });
 
   // Save Settings
   document.getElementById("btn-save-settings").addEventListener("click", () => {
     currentConfig.carrier = document.getElementById("input-carrier").value.trim() || DEFAULT_CONFIG.carrier;
     currentConfig.count = document.getElementById("input-count").value.trim() || DEFAULT_CONFIG.count;
-    currentConfig.purchased = document.getElementById("input-purchased").value.trim() || DEFAULT_CONFIG.purchased;
-    
+    currentConfig.purchased = document.getElementById("input-purchased").value.trim() || getCurrentUkTime();
+
     const secInput = parseInt(document.getElementById("input-timer-seconds").value, 10);
-    currentRemaining = !isNaN(secInput) && secInput >= 0 ? secInput : currentConfig.secondsRemaining;
-    currentConfig.secondsRemaining = currentRemaining;
+    const newRemaining = !isNaN(secInput) && secInput >= 0 ? secInput : TICKET_DURATION_SECONDS;
+    currentRemaining = newRemaining;
+    currentConfig.secondsRemaining = newRemaining;
+    // Align startTime to the new remaining seconds
+    currentConfig.startTime = Date.now() - (TICKET_DURATION_SECONDS - newRemaining) * 1000;
 
     currentConfig.serial = document.getElementById("input-serial").value.trim() || DEFAULT_CONFIG.serial;
     currentConfig.ticker = document.getElementById("input-ticker").value.trim() || DEFAULT_CONFIG.ticker;
 
+    saveTicketState();
     updateUI();
     startTimer();
 
     settingsModal.classList.remove("active");
   });
 
-  // Reset to Defaults (1:30:00)
+  // Reset to Defaults (Synchronized with Current Time)
   document.getElementById("btn-reset-defaults").addEventListener("click", () => {
-    currentConfig = { ...DEFAULT_CONFIG };
-    currentRemaining = DEFAULT_CONFIG.secondsRemaining;
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+
+    initSynchronizedTicket();
     updateUI();
     startTimer();
     settingsModal.classList.remove("active");
@@ -157,6 +235,7 @@ function initModals() {
   // Hide Gear Button
   document.getElementById("btn-hide-gear").addEventListener("click", () => {
     currentConfig.gearVisible = false;
+    saveTicketState();
     updateUI();
     settingsModal.classList.remove("active");
   });
@@ -175,6 +254,7 @@ function initModals() {
 
       if (logoClickCount >= 3) {
         currentConfig.gearVisible = !currentConfig.gearVisible;
+        saveTicketState();
         updateUI();
         logoClickCount = 0;
       }
@@ -184,6 +264,7 @@ function initModals() {
   window.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.shiftKey && e.code === "KeyS") {
       currentConfig.gearVisible = !currentConfig.gearVisible;
+      saveTicketState();
       updateUI();
     }
   });
@@ -191,6 +272,7 @@ function initModals() {
 
 // Initialize on DOM load
 document.addEventListener("DOMContentLoaded", () => {
+  initSynchronizedTicket();
   updateUI();
   startTimer();
   initModals();
