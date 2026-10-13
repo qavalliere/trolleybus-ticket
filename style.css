@@ -1,0 +1,567 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-page: #f3f3f3;
+  --card-bg: #ffffff;
+  --text-black: #000000;
+  --text-dark: #000000;
+  --text-gray: #555555;
+  --text-footer: #8c929a;
+  --teal-banner-bg: #e4eef0;
+  --teal-text: #186058;
+  --teal-diamond: #12716a;
+  --pill-bg: linear-gradient(90deg, #cfeddd 0%, #d5e8f7 100%);
+  --pill-text: #000000;
+  --green-indicator: #20b069;
+  --divider-color: #eaeaea;
+  --dashed-color: #d4d7db;
+  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Helvetica Neue", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-page);
+  font-family: var(--font-family);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 6px 36px 6px;
+  overflow-x: hidden;
+}
+
+/* Responsive Ticket Page Width */
+.ticket-page {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Header with Centered Logo & Info Icon */
+.ticket-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 76px;
+  margin-bottom: -38px;
+  z-index: 10;
+  padding: 0 10px;
+}
+
+.logo-badge {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.info-btn {
+  position: absolute;
+  right: 14px;
+  top: 60px;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.info-btn:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.info-btn svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* The Ticket White Card */
+.ticket-card {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: visible;
+  padding-top: 56px;
+}
+
+/* Top Notch Cutout under the Logo */
+.notch-top {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--bg-page);
+  z-index: 5;
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+
+/* Marquee Strip */
+.marquee-bar {
+  background: var(--teal-banner-bg);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--teal-text);
+  letter-spacing: -0.15px;
+  padding-right: 48px;
+}
+
+.marquee-diamond {
+  display: inline-block;
+  color: var(--teal-diamond);
+  margin-right: 9px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Upper Section */
+.ticket-upper-body {
+  text-align: center;
+  padding: 4px 16px 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carrier-title {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--text-black);
+  letter-spacing: -0.2px;
+  margin-top: 4px;
+  margin-bottom: 26px;
+}
+
+.mini-divider {
+  width: 160px;
+  height: 1.5px;
+  background-color: var(--divider-color);
+  border-radius: 1px;
+  margin-bottom: 24px;
+}
+
+.purchase-time {
+  font-size: 15px;
+  color: var(--text-gray);
+  font-weight: 400;
+  letter-spacing: -0.15px;
+  margin-bottom: 28px;
+}
+
+.ticket-amount {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-black);
+  letter-spacing: -0.4px;
+  line-height: 1;
+  margin-bottom: 26px;
+}
+
+/* Status Countdown Pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 47px;
+  padding: 0 20px 0 16px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #d4ebdb 0%, #d2e9e3 35%, #d6e8f2 70%, #d6e6f5 100%);
+  box-shadow: none;
+  border: none;
+}
+
+.status-circle {
+  width: 19px;
+  height: 19px;
+  border: 1.8px solid #58b388;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.status-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: -0.15px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Perforation Divider */
+.ticket-perforation {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  margin: 12px 0 8px 0;
+}
+
+.dashes-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 68px);
+  height: 2px;
+}
+
+.dash {
+  width: 13.5px;
+  height: 2px;
+  background-color: #cecece;
+  flex-shrink: 0;
+  display: block;
+}
+
+.notch-left,
+.notch-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-page);
+  z-index: 2;
+}
+
+.notch-left {
+  left: -18px;
+}
+
+.notch-right {
+  right: -18px;
+}
+
+/* Lower Section */
+.ticket-lower-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 24px 20px;
+}
+
+/* QR Code Card Wrapper */
+.qr-container {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 298px;
+  height: 298px;
+  margin-bottom: 22px;
+}
+
+.original-qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+
+.ticket-serial {
+  font-size: 15.5px;
+  color: var(--text-gray);
+  font-weight: 400;
+  letter-spacing: -0.1px;
+  margin-top: 22px;
+  margin-bottom: 28px;
+}
+
+.ticket-serial strong {
+  color: #111418;
+  font-weight: 700;
+  margin-left: 3px;
+}
+
+/* Gentle Undulating Bottom Waves */
+.ticket-scallop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 19px;
+  display: block;
+  fill: var(--card-bg);
+  pointer-events: none;
+  margin-top: -1px;
+}
+
+/* Footer Notice */
+.ticket-footer {
+  margin-top: 48px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer-notice {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--text-gray);
+  font-weight: 400;
+  letter-spacing: -0.15px;
+}
+
+/* Floating Settings Button */
+.demo-controls-trigger {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #111827;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  z-index: 100;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.75;
+}
+
+.demo-controls-trigger:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-sheet {
+  background: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 24px 24px 0 0;
+  padding: 22px 20px 32px 20px;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+  animation: slide-up 0.25s ease-out;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.modal-close {
+  background: #f3f4f6;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: #10b981;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 10px;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.info-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.info-item-label {
+  color: #6b7280;
+}
+
+.info-item-value {
+  font-weight: 600;
+  color: #111827;
+}
+
+.badge-paid {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}

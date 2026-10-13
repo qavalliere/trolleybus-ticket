@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Monobank cat head silhouette -->
+  <path d="M 22 20
+           C 25 32, 32 38, 40 40
+           C 44 39, 47 38.5, 50 38.5
+           C 53 38.5, 56 39, 60 40
+           C 68 38, 75 32, 78 20
+           C 82 35, 85 52, 82 66
+           C 78 82, 66 90, 50 90
+           C 34 90, 22 82, 18 66
+           C 15 52, 18 35, 22 20 Z" 
+        fill="#000000" />
+  <!-- Small subtle ear inners or solid black - in monobank it is solid black with white mask around it -->
+</svg>

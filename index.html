@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>pay.monobank.ua</title>
+  <link rel="icon" href="cat-logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#f3f3f3">
+</head>
+<body>
+
+  <!-- Ticket Page Container -->
+  <main class="ticket-page">
+
+    <!-- Top Header: Logo & Info Icon -->
+    <header class="ticket-header">
+      <div class="logo-badge" title="Миколаївелектротранс">
+        <img src="met-logo-clean.png" alt="МЕТ Логотип">
+      </div>
+      <button class="info-btn" id="open-info-btn" aria-label="Деталі квитка" title="Інформація">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="13" cy="13" r="11.8" stroke="#757c86" stroke-width="1.8"/>
+          <circle cx="13" cy="8.3" r="1.15" fill="#757c86"/>
+          <path d="M11.8 11.5 H13 V18" stroke="#757c86" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Ticket White Card -->
+    <article class="ticket-card">
+      
+      <!-- Top Notch Cutout for the Logo -->
+      <div class="notch-top"></div>
+
+      <!-- Scrolling Marquee Banner -->
+      <div class="marquee-bar">
+        <div class="marquee-track" id="marquee-track">
+          <div class="marquee-item">
+            <span class="marquee-diamond">◆</span>
+            <span class="ticker-text">Життя — цікаве, і мотивація то є сильна: філософія, психологія. Найголовніше — залишайтеся людьми і кричіть, що ви живі. Я живий!</span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-diamond">◆</span>
+            <span class="ticker-text">Життя — цікаве, і мотивація то є сильна: філософія, психологія. Найголовніше — залишайтеся людьми і кричіть, що ви живі. Я живий!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket Upper Content -->
+      <section class="ticket-upper-body">
+        <h1 class="carrier-title" id="display-carrier">Миколаївелектротранс</h1>
+        <div class="mini-divider"></div>
+        <p class="purchase-time" id="display-purchased">Придбано 13 жовтня о 20:09</p>
+        <div class="ticket-amount" id="display-count">1 квиток</div>
+
+        <!-- Real-time Valid Countdown Pill (Starting from 1:30:00) -->
+        <div class="status-pill">
+          <span class="status-circle"></span>
+          <span class="status-text">Квиток дійсний — <span id="display-timer">1:30:00</span></span>
+        </div>
+      </section>
+
+      <!-- Perforation Divider (Exact 15 Dashes as in Original) -->
+      <div class="ticket-perforation">
+        <div class="notch-left"></div>
+        <div class="dashes-wrapper">
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+          <span class="dash"></span>
+        </div>
+        <div class="notch-right"></div>
+      </div>
+
+      <!-- Ticket Lower Content (QR & Serial) -->
+      <section class="ticket-lower-body">
+        <div class="qr-container">
+          <img src="qr-perfect.png" alt="QR-код квитка" class="original-qr-img" id="display-qr-img">
+        </div>
+
+        <div class="ticket-serial">
+          Номер: <strong id="display-serial">164 142</strong>
+        </div>
+      </section>
+
+      <!-- Gentle Undulating Bottom Waves (Exact Match to Original) -->
+      <svg class="ticket-scallop" viewBox="0 0 454 19" preserveAspectRatio="none">
+        <path d="M 0 0 L 0 9 L 1 11 L 2 10 L 3 9 L 4 8 L 5 7 L 6 6 L 7 5 L 8 4 L 9 4 L 10 3 L 11 2 L 12 2 L 13 1 L 14 1 L 15 1 L 16 1 L 17 1 L 18 0 L 19 0 L 20 0 L 21 0 L 22 0 L 23 0 L 24 1 L 25 1 L 26 1 L 27 1 L 28 2 L 29 2 L 30 3 L 31 3 L 32 4 L 33 5 L 34 6 L 35 7 L 36 8 L 37 9 L 38 10 L 39 11 L 40 12 L 41 13 L 42 14 L 43 15 L 44 16 L 45 16 L 46 17 L 47 17 L 48 18 L 49 18 L 50 18 L 51 18 L 52 18 L 53 19 L 54 19 L 55 19 L 56 19 L 57 18 L 58 18 L 59 18 L 60 18 L 61 18 L 62 17 L 63 17 L 64 17 L 65 16 L 66 15 L 67 15 L 68 13 L 69 12 L 70 11 L 71 10 L 72 9 L 73 8 L 74 8 L 75 6 L 76 5 L 77 4 L 78 3 L 79 3 L 80 2 L 81 2 L 82 1 L 83 1 L 84 1 L 85 1 L 86 0 L 87 0 L 88 0 L 89 0 L 90 0 L 91 0 L 92 1 L 93 1 L 94 1 L 95 1 L 96 1 L 97 2 L 98 2 L 99 3 L 100 3 L 101 4 L 102 5 L 103 6 L 104 7 L 105 8 L 106 9 L 107 10 L 108 11 L 109 12 L 110 14 L 111 14 L 112 15 L 113 16 L 114 16 L 115 17 L 116 17 L 117 18 L 118 18 L 119 18 L 120 18 L 121 19 L 122 19 L 123 19 L 124 19 L 125 19 L 126 19 L 127 19 L 128 18 L 129 18 L 130 18 L 131 17 L 132 17 L 133 16 L 134 16 L 135 15 L 136 15 L 137 14 L 138 13 L 139 12 L 140 10 L 141 9 L 142 9 L 143 7 L 144 6 L 145 5 L 146 4 L 147 4 L 148 3 L 149 2 L 150 2 L 151 2 L 152 1 L 153 1 L 154 1 L 155 1 L 156 0 L 157 0 L 158 0 L 159 0 L 160 0 L 161 0 L 162 1 L 163 1 L 164 1 L 165 1 L 166 2 L 167 2 L 168 3 L 169 3 L 170 4 L 171 5 L 172 6 L 173 7 L 174 8 L 175 9 L 176 10 L 177 11 L 178 12 L 179 13 L 180 14 L 181 15 L 182 15 L 183 16 L 184 17 L 185 17 L 186 18 L 187 18 L 188 18 L 189 18 L 190 18 L 191 19 L 192 19 L 193 19 L 194 19 L 195 19 L 196 18 L 197 18 L 198 18 L 199 18 L 200 17 L 201 17 L 202 17 L 203 16 L 204 15 L 205 15 L 206 14 L 207 13 L 208 12 L 209 10 L 210 9 L 211 9 L 212 8 L 213 6 L 214 5 L 215 4 L 216 3 L 217 3 L 218 2 L 219 2 L 220 2 L 221 1 L 222 1 L 223 1 L 224 0 L 225 0 L 226 0 L 227 0 L 228 0 L 229 0 L 230 0 L 231 1 L 232 1 L 233 1 L 234 1 L 235 2 L 236 2 L 237 3 L 238 3 L 239 4 L 240 5 L 241 5 L 242 7 L 243 8 L 244 9 L 245 10 L 246 11 L 247 12 L 248 14 L 249 14 L 250 15 L 251 16 L 252 16 L 253 17 L 254 17 L 255 18 L 256 18 L 257 18 L 258 18 L 259 19 L 260 19 L 261 19 L 262 19 L 263 19 L 264 19 L 265 19 L 266 18 L 267 18 L 268 18 L 269 17 L 270 17 L 271 16 L 272 16 L 273 16 L 274 15 L 275 14 L 276 13 L 277 12 L 278 10 L 279 10 L 280 9 L 281 7 L 282 6 L 283 5 L 284 4 L 285 4 L 286 3 L 287 2 L 288 2 L 289 2 L 290 1 L 291 1 L 292 1 L 293 1 L 294 0 L 295 0 L 296 0 L 297 0 L 298 0 L 299 0 L 300 1 L 301 1 L 302 1 L 303 1 L 304 2 L 305 2 L 306 3 L 307 3 L 308 4 L 309 4 L 310 6 L 311 7 L 312 8 L 313 9 L 314 10 L 315 11 L 316 12 L 317 13 L 318 14 L 319 15 L 320 16 L 321 16 L 322 17 L 323 17 L 324 18 L 325 18 L 326 18 L 327 18 L 328 18 L 329 19 L 330 19 L 331 19 L 332 19 L 333 19 L 334 18 L 335 18 L 336 18 L 337 18 L 338 17 L 339 17 L 340 17 L 341 16 L 342 15 L 343 15 L 344 14 L 345 13 L 346 12 L 347 10 L 348 10 L 349 9 L 350 8 L 351 6 L 352 5 L 353 4 L 354 4 L 355 3 L 356 2 L 357 2 L 358 2 L 359 1 L 360 1 L 361 1 L 362 0 L 363 0 L 364 0 L 365 0 L 366 0 L 367 0 L 368 0 L 369 1 L 370 1 L 371 1 L 372 1 L 373 2 L 374 2 L 375 2 L 376 3 L 377 4 L 378 5 L 379 5 L 380 6 L 381 8 L 382 9 L 383 10 L 384 11 L 385 12 L 386 14 L 387 14 L 388 15 L 389 16 L 390 16 L 391 17 L 392 17 L 393 18 L 394 18 L 395 18 L 396 18 L 397 19 L 398 19 L 399 19 L 400 19 L 401 19 L 402 19 L 403 18 L 404 18 L 405 18 L 406 18 L 407 17 L 408 17 L 409 16 L 410 16 L 411 16 L 412 15 L 413 14 L 414 13 L 415 12 L 416 11 L 417 10 L 418 9 L 419 7 L 420 6 L 421 5 L 422 5 L 423 4 L 424 3 L 425 2 L 426 2 L 427 2 L 428 1 L 429 1 L 430 1 L 431 1 L 432 0 L 433 0 L 434 0 L 435 0 L 436 0 L 437 0 L 438 1 L 439 1 L 440 1 L 441 1 L 442 2 L 443 2 L 444 3 L 445 3 L 446 4 L 447 4 L 448 5 L 449 6 L 450 8 L 451 9 L 452 10 L 453 11 L 454 11 L 454 0 Z" />
+      </svg>
+    </article>
+
+    <!-- Footer Note -->
+    <footer class="ticket-footer">
+      <p class="footer-notice">Ви зможете повторно відкрити цю<br>сторінку через історію браузера</p>
+    </footer>
+
+  </main>
+
+  <!-- Floating Settings Button (subtle, for coursework demonstration) -->
+  <button class="demo-controls-trigger" id="open-settings-btn" title="Налаштування квитка">
+    ⚙
+  </button>
+
+  <!-- Info Modal Sheet -->
+  <div class="modal-overlay" id="info-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2 class="modal-title">Деталі квитка</h2>
+        <button class="modal-close" id="close-info-btn">&times;</button>
+      </div>
+      <div class="info-details-list">
+        <div class="info-item">
+          <span class="info-item-label">Статус</span>
+          <span class="badge-paid">Оплачено</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Перевізник</span>
+          <span class="info-item-value" id="info-carrier">Миколаївелектротранс</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Номер квитка</span>
+          <span class="info-item-value" id="info-serial">164 142</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Кількість</span>
+          <span class="info-item-value" id="info-count">1 квиток</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Тип квитка</span>
+          <span class="info-item-value">Разовий міський</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item-label">Оплата</span>
+          <span class="info-item-value">monobank (QR)</span>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn-close-info-ok">Зрозуміло</button>
+    </div>
+  </div>
+
+  <!-- Settings Customizer Modal -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2 class="modal-title">Параметри квитка</h2>
+        <button class="modal-close" id="close-settings-btn">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-carrier">Перевізник:</label>
+        <input type="text" id="input-carrier" class="form-input" value="Миколаївелектротранс">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-count">Кількість квитків:</label>
+        <input type="text" id="input-count" class="form-input" value="1 квиток">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-purchased">Дата та час купівлі:</label>
+        <input type="text" id="input-purchased" class="form-input" value="Придбано 13 жовтня о 20:09">
+        <button type="button" class="btn-secondary" id="btn-set-current-time" style="font-size: 12px; margin-top: 4px; padding: 6px;">Встановити поточний час</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-timer-seconds">Залишок дії таймера (секунди):</label>
+        <input type="number" id="input-timer-seconds" class="form-input" value="5400">
+        <small style="color: #6b7280; font-size: 11px;">(5400 сек = 1:30:00)</small>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-serial">Номер квитка:</label>
+        <input type="text" id="input-serial" class="form-input" value="164 142">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input-ticker">Текст рухомого рядка:</label>
+        <input type="text" id="input-ticker" class="form-input" value="Життя — цікаве, і мотивація то є сильна: філософія, психологія. Найголовніше — залишайтеся людьми і кричіть, що ви живі. Я живий!">
+      </div>
+
+      <button class="btn-primary" id="btn-save-settings">Застосувати зміни</button>
+      <button class="btn-secondary" id="btn-reset-defaults">Скинути до 1:30:00</button>
+      <button class="btn-secondary" id="btn-hide-gear" style="color: #ef4444;">Приховати кнопку налаштувань (⚙)</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
