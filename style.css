@@ -343,18 +343,20 @@ body {
 }
 
 .ticket-serial {
-  font-size: 15.5px;
-  color: var(--text-gray);
+  font-size: 17px;
+  color: #555555;
   font-weight: 400;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.2px;
   margin-top: 22px;
   margin-bottom: 28px;
+  font-feature-settings: "cv01" 1;
 }
 
-.ticket-serial strong {
-  color: #111418;
-  font-weight: 700;
-  margin-left: 3px;
+.ticket-serial strong,
+.ticket-serial .serial-number {
+  color: #000000;
+  font-weight: 500;
+  font-feature-settings: "cv01" 1;
 }
 
 /* Gentle Undulating Bottom Waves */
