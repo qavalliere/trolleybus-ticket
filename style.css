@@ -7,9 +7,9 @@
   --text-dark: #000000;
   --text-gray: #555555;
   --text-footer: #8c929a;
-  --teal-banner-bg: #e4eef0;
-  --teal-text: #186058;
-  --teal-diamond: #12716a;
+  --marquee-bg: #f2ebf3;
+  --marquee-text: #874492;
+  --marquee-diamond: #874492;
   --pill-bg: linear-gradient(90deg, #cfeddd 0%, #d5e8f7 100%);
   --pill-text: #000000;
   --green-indicator: #20b069;
@@ -138,7 +138,7 @@ body {
 
 /* Marquee Strip */
 .marquee-bar {
-  background: var(--teal-banner-bg);
+  background: var(--marquee-bg);
   height: 42px;
   display: flex;
   align-items: center;
@@ -165,14 +165,14 @@ body {
   align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: var(--teal-text);
+  color: var(--marquee-text);
   letter-spacing: -0.15px;
   padding-right: 48px;
 }
 
 .marquee-diamond {
   display: inline-block;
-  color: var(--teal-diamond);
+  color: var(--marquee-diamond);
   margin-right: 9px;
   font-size: 13px;
   line-height: 1;
@@ -272,7 +272,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
+  overflow: hidden;
   margin: 12px 0 8px 0;
 }
 
@@ -288,7 +288,7 @@ body {
   width: 13.5px;
   height: 2px;
   background-color: #cecece;
-  flex-shrink: 0;
+  flex-shrink: 1;
   display: block;
 }
 
